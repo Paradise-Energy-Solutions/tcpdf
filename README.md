@@ -1,3 +1,8 @@
+> **Paradise Energy Solutions fork.** This is a modified version of TCPDF 6.3.0 maintained by
+> Paradise Energy Solutions on branch `pes/6.3.x`. It is not affiliated with Tecnick.com LTD.
+> See [PATCHES.md](PATCHES.md) for every change, its date and its reason. Original copyright
+> notices and the LGPL-3.0 license (`LICENSE.TXT`) are retained.
+
 # TCPDF
 *PHP PDF Library*
 
