@@ -6,6 +6,7 @@
 // Last Update : 2019-09-19
 // Author      : Nicola Asuni - Tecnick.com LTD - www.tecnick.com - info@tecnick.com
 // License     : GNU-LGPL v3 (http://www.gnu.org/copyleft/lesser.html)
+// Modified    : Paradise Energy Solutions (PES fork) - see PATCHES.md
 // -------------------------------------------------------------------
 // Copyright (C) 2002-2019 Nicola Asuni - Tecnick.com LTD
 //
@@ -4130,6 +4131,7 @@ class TCPDF {
 	 * @since 5.9.000 (2010-09-28)
 	 */
 	public function getRawCharWidth($char) {
+		$char = (int)round($char);
 		if ($char == 173) {
 			// SHY character will not be printed
 			return (0);
@@ -7368,7 +7370,7 @@ class TCPDF {
 			// GD alpha is only 7 bit (0 -> 127)
 			$this->gdgammacache['#'.$c] = (((127 - $colors['alpha']) / 127) * 255);
 			// correct gamma
-			$this->gdgammacache['#'.$c] = (pow(($this->gdgammacache['#'.$c] / 255), 2.2) * 255);
+			$this->gdgammacache['#'.$c] = (int)round(pow(($this->gdgammacache['#'.$c] / 255), 2.2) * 255);
 			// store the latest values on cache to improve performances
 			if (count($this->gdgammacache) > 8) {
 				// remove one element from the cache array
