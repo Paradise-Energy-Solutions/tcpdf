@@ -7798,9 +7798,10 @@ class TCPDF {
 				}
 				closedir($handle);
 			}
-			foreach($this->imagekeys as $file) {
-				unlink($file);
-			}
+            // TODO: this is deleting images upon generation
+//			foreach($this->imagekeys as $file) {
+//				unlink($file);
+//			}
 		}
 		$preserve = array(
 			'file_id',
