@@ -22985,14 +22985,12 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 		$this->_out(sprintf('%F %F %F %F %F %F cm', $svgscale_x, 0, 0, $svgscale_y, ($e + $svgoffset_x), ($f + $svgoffset_y)));
 		// creates a new XML parser to be used by the other XML functions
 		$this->parser = xml_parser_create('UTF-8');
-		// the following function allows to use parser inside object
-		xml_set_object($this->parser, $this);
 		// disable case-folding for this XML parser
 		xml_parser_set_option($this->parser, XML_OPTION_CASE_FOLDING, 0);
 		// sets the element handler functions for the XML parser
-		xml_set_element_handler($this->parser, 'startSVGElementHandler', 'endSVGElementHandler');
+		xml_set_element_handler($this->parser, array($this, 'startSVGElementHandler'), array($this, 'endSVGElementHandler'));
 		// sets the character data handler function for the XML parser
-		xml_set_character_data_handler($this->parser, 'segSVGContentHandler');
+		xml_set_character_data_handler($this->parser, array($this, 'segSVGContentHandler'));
 		// start parsing an XML document
 		if (!xml_parse($this->parser, $svgdata)) {
 			$error_message = sprintf('SVG Error: %s at line %d', xml_error_string(xml_get_error_code($this->parser)), xml_get_current_line_number($this->parser));
