@@ -53,6 +53,7 @@ PHP 8.4 compatibility and TLS hardening, ported from LAMP PR #396 (LD-920). Must
 | # | Date | Origin | Files | Change |
 |---|------|--------|-------|--------|
 | PES-4 | 2026-11-03 | LD-920, LAMP #396 (831386109) | `tcpdf.php` | `ImageSVG()`: drop `xml_set_object()` (deprecated in PHP 8.4) and register the SVG XML handlers as callables (`array($this, 'startSVGElementHandler')`, `array($this, 'endSVGElementHandler')`, `array($this, 'segSVGContentHandler')`) instead of method-name strings. No behaviour change. |
+| PES-5 | 2026-11-03 | LD-920, LAMP #396 (831386109) | `include/tcpdf_static.php` | `url_exists()` and `fileGetContents()`: remove `curl_close()` (a no-op since PHP 8.0, deprecated in PHP 8.5) and `CURLOPT_BINARYTRANSFER` (a no-op since PHP 5.1.3, deprecated in PHP 8.4). No behaviour change. |
 
 ## Files intentionally not in this repository
 

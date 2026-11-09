@@ -6,6 +6,7 @@
 // Last Update : 2015-04-28
 // Author      : Nicola Asuni - Tecnick.com LTD - www.tecnick.com - info@tecnick.com
 // License     : GNU-LGPL v3 (http://www.gnu.org/copyleft/lesser.html)
+// Modified    : Paradise Energy Solutions (PES fork) - see PATCHES.md
 // -------------------------------------------------------------------
 // Copyright (C) 2002-2015 Nicola Asuni - Tecnick.com LTD
 //
@@ -1842,7 +1843,6 @@ class TCPDF_STATIC {
 		curl_setopt($crs, CURLOPT_USERAGENT, 'tc-lib-file');
 		curl_exec($crs);
 		$code = curl_getinfo($crs, CURLINFO_HTTP_CODE);
-		curl_close($crs);
 		return ($code == 200);
 	}
 
@@ -1940,7 +1940,6 @@ class TCPDF_STATIC {
 				// try to get remote file data using cURL
 				$crs = curl_init();
 				curl_setopt($crs, CURLOPT_URL, $path);
-				curl_setopt($crs, CURLOPT_BINARYTRANSFER, true);
 				curl_setopt($crs, CURLOPT_FAILONERROR, true);
 				curl_setopt($crs, CURLOPT_RETURNTRANSFER, true);
 				if ((ini_get('open_basedir') == '') && (!ini_get('safe_mode'))) {
@@ -1952,7 +1951,6 @@ class TCPDF_STATIC {
 				curl_setopt($crs, CURLOPT_SSL_VERIFYHOST, false);
 				curl_setopt($crs, CURLOPT_USERAGENT, 'tc-lib-file');
 				$ret = curl_exec($crs);
-				curl_close($crs);
 				if ($ret !== false) {
 					return $ret;
 				}
