@@ -46,6 +46,14 @@ Rebasing onto a current upstream release is tracked in LD-934.
 
 Fork metadata (this file, README notice, `composer.json` version field) was added in the same release.
 
+### 6.3.0.2
+
+PHP 8.4 compatibility and TLS hardening, ported from LAMP PR #396 (LD-920). Must remain PHP 8.1-compatible.
+
+| # | Date | Origin | Files | Change |
+|---|------|--------|-------|--------|
+| PES-4 | 2026-11-03 | LD-920, LAMP #396 (831386109) | `tcpdf.php` | `ImageSVG()`: drop `xml_set_object()` (deprecated in PHP 8.4) and register the SVG XML handlers as callables (`array($this, 'startSVGElementHandler')`, `array($this, 'endSVGElementHandler')`, `array($this, 'segSVGContentHandler')`) instead of method-name strings. No behaviour change. |
+
 ## Files intentionally not in this repository
 
 LAMP's in-tree copy also contained the commercial *Century Gothic* font conversions
