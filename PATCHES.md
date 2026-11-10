@@ -56,6 +56,14 @@ PHP 8.4 compatibility and TLS hardening, ported from LAMP PR #396 (LD-920). Must
 | PES-5 | 2026-11-03 | LD-920, LAMP #396 (831386109) | `include/tcpdf_static.php` | `url_exists()` and `fileGetContents()`: remove `curl_close()` (a no-op since PHP 8.0, deprecated in PHP 8.5) and `CURLOPT_BINARYTRANSFER` (a no-op since PHP 5.1.3, deprecated in PHP 8.4). No behaviour change. |
 | PES-6 | 2026-11-04 | LD-920, LAMP #396 (e4beb0487) | `include/tcpdf_static.php` | `url_exists()` and the cURL fallback in `fileGetContents()`: enable TLS verification (`CURLOPT_SSL_VERIFYPEER` = `true`, `CURLOPT_SSL_VERIFYHOST` = `2`) instead of disabling it. **Behaviour change:** remote `https://` resources whose certificate does not verify against the system CA bundle are no longer loaded. |
 
+### 6.3.0.3
+
+PHP 8.4 deprecation cleanup, ported from LAMP PR #397 (LD-927). Must remain PHP 8.1-compatible.
+
+| # | Date | Origin | Files | Change |
+|---|------|--------|-------|--------|
+| PES-7 | 2026-11-04 | LD-927, LAMP #397 (d96940031, bc92ef923) | `include/tcpdf_fonts.php` | `UTF8StringToArray()`, `UTF8ToLatin1()`, `UTF8ToUTF16BE()`, `utf8StrRev()`, `utf8StrArrRev()`, `utf8Bidi()`: give the by-reference `&$currentfont` a `null` default, fixing the "optional parameter declared before required parameter" deprecation. `UTF8StringToArray()` and `utf8Bidi()` replace a `null` font with `array('subsetchars' => array())`. **Behaviour change (additive):** these functions can now be called without a font context, which used to throw `ArgumentCountError`. Existing callers always pass the font and are unaffected. |
+
 ## Files intentionally not in this repository
 
 LAMP's in-tree copy also contained the commercial *Century Gothic* font conversions
