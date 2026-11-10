@@ -64,6 +64,7 @@ PHP 8.4 deprecation cleanup, ported from LAMP PR #397 (LD-927). Must remain PHP 
 |---|------|--------|-------|--------|
 | PES-7 | 2026-11-04 | LD-927, LAMP #397 (d96940031, bc92ef923) | `include/tcpdf_fonts.php` | `UTF8StringToArray()`, `UTF8ToLatin1()`, `UTF8ToUTF16BE()`, `utf8StrRev()`, `utf8StrArrRev()`, `utf8Bidi()`: give the by-reference `&$currentfont` a `null` default, fixing the "optional parameter declared before required parameter" deprecation. `UTF8StringToArray()` and `utf8Bidi()` replace a `null` font with `array('subsetchars' => array())`. **Behaviour change (additive):** these functions can now be called without a font context, which used to throw `ArgumentCountError`. Existing callers always pass the font and are unaffected. |
 | PES-8 | 2026-11-04 | LD-927, LAMP #397 (d96940031) | `include/tcpdf_static.php` | `fixHTMLCode()`: `&$tagvspaces` defaults to `array()`. `setPageBoxes()`: `$k` defaults to `1`. Both fix the "optional parameter declared before required parameter" deprecation. TCPDF always passes both arguments, so there is no behaviour change for existing callers. |
+| PES-9 | 2026-11-04 | LD-927, LAMP #397 (d96940031) | `include/tcpdf_static.php` | `pregSplit()`: map a `NULL` `$limit` to `-1` and a `NULL` `$flags` to `0` before calling `preg_split()`, which deprecates `null` for these int parameters since PHP 8.1. `preg_split()` already treated a `null` limit as "no limit" and `null` flags as none, so there is no behaviour change. |
 
 ## Files intentionally not in this repository
 
