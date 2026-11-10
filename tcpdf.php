@@ -140,6 +140,14 @@ class TCPDF {
 	// Protected properties
 
 	/**
+	 * XML parser used while rendering SVG content.
+	 *
+	 * Declared explicitly for PHP 8.4, which deprecates dynamic properties.
+	 * @protected
+	 */
+	protected $parser;
+
+	/**
 	 * Current page number.
 	 * @protected
 	 */

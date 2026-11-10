@@ -1137,7 +1137,7 @@ class TCPDF_STATIC {
 	 * @see setHtmlVSpace()
 	 * @public static
 	 */
-	public static function fixHTMLCode($html, $default_css='', $tagvs='', $tidy_options='', &$tagvspaces) {
+	public static function fixHTMLCode($html, $default_css='', $tagvs='', $tidy_options='', &$tagvspaces=array()) {
 		// configure parameters for HTML Tidy
 		if ($tidy_options === '') {
 			$tidy_options = array (
@@ -1789,6 +1789,9 @@ class TCPDF_STATIC {
 	 * @public static
 	 */
 	public static function pregSplit($pattern, $modifiers, $subject, $limit=NULL, $flags=NULL) {
+		// PHP 8.4 deprecates passing NULL to the native preg_split arguments.
+		$limit = $limit ?? -1;
+		$flags = $flags ?? 0;
 		// the bug only happens on PHP 5.2 when using the u modifier
 		if ((strpos($modifiers, 'u') === FALSE) OR (count(preg_split('//u', "\n\t", -1, PREG_SPLIT_NO_EMPTY)) == 2)) {
 			return preg_split($pattern.$modifiers, $subject, $limit, $flags);
@@ -2483,7 +2486,7 @@ class TCPDF_STATIC {
 	 * @since 5.0.010 (2010-05-17)
 	 * @public static
 	 */
-	public static function setPageBoxes($page, $type, $llx, $lly, $urx, $ury, $points=false, $k, $pagedim=array()) {
+	public static function setPageBoxes($page, $type, $llx, $lly, $urx, $ury, $points=false, $k=1, $pagedim=array()) {
 		if (!isset($pagedim[$page])) {
 			// initialize array
 			$pagedim[$page] = array();
